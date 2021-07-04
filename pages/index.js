@@ -4,8 +4,23 @@ import { ViewGridIcon, MicrophoneIcon } from "@heroicons/react/solid";
 import { SearchIcon } from "@heroicons/react/outline"
 import Image from "next/image"
 import Footer from '../components/Footer';
+import { useRef } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
+  const searchInputRef = useRef(null);
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    const term = searchInputRef.current.value;
+
+    if(!term) return;
+
+    router.push(`/search?term=${term}`);
+}
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <Head>
@@ -36,13 +51,13 @@ export default function Home() {
 
         <div className=" flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 sm:max-w-xl lg:max-w-2xl">
           <SearchIcon className="h-5 mr-3 text-gray-500 cursor-pointer"/>
-          <input type="text" className=" flex-grow focus:outline-none"/>
+          <input ref={searchInputRef} type="text" className=" flex-grow focus:outline-none"/>
           <MicrophoneIcon className="h-5 text-gray-500 cursor-pointer"/>
         </div>
 
         <div className="flex flex-col w-1/2 space-y-2 mt-8 justify-center sm:space-y-0 sm:flex-row sm:space-x-4">
-          <button className="btn"> Google Search </button>
-          <button className="btn"> I'm Feeling Lucky </button>
+          <button onClick={submit} className="btn"> Google Search </button>
+          <button onClick={submit} className="btn"> I'm Feeling Lucky </button>
         </div>
       </form>
 
