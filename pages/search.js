@@ -33,9 +33,10 @@ export default Search
 export async function getServerSideProps(context) {
     const useDummyData = false; 
     const startIndex = context.query.start || "0";
+    //startIndex is use to pagination, it means it use to "go to next page"
 
     const data = useDummyData
-     ? Response
+     ? Response                                        //API Key from google  //context key use to allow what websites i can use and wkat sites i can't use
      : await fetch(`https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${context.query.term}&start=${startIndex}`
     ).then(response => response.json());
 

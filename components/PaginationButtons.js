@@ -9,6 +9,7 @@ function PaginationButtons() {
     return (
         <div className="flex justify-between text-blue-700 max-w-lg mb-10">
             {startIndex >= 10 && (
+                //{startIndex - 10} is use to pass the link 10 to 0, it help to move severel pages
                 <Link href={`/search?term=${router.query.term}&start=${startIndex - 10}`}>
                     <div className="flex flex-grow flex-col items-center cursor-pointer hover:underline">
                         <ChevronLeftIcon className="h-5"/>
@@ -16,6 +17,7 @@ function PaginationButtons() {
                     </div>
                 </Link>
             )}
+            {/* {startIndex - 10} is use to pass the link 10 to 0, it help to move severel pages */}
             <Link href={`/search?term=${router.query.term}&start=${startIndex + 10}`}>
                 <div className="flex flex-grow flex-col items-center cursor-pointer hover:underline">
                     <ChevronRightIcon className="h-5"/>
