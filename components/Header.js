@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import Avatar from "./Avatar";
+import HeaderOptions from "./HeaderOptions";
 function Header() {
     const searchInputRef = useRef();
     const router = useRouter();
@@ -13,7 +14,7 @@ function Header() {
         const term = searchInputRef.current.value;
 
         if(!term) return;
-        router.push(`/search?term${term}`);
+        router.push(`/search?term=${term}`);
 
     }
 
@@ -37,9 +38,14 @@ function Header() {
                     <SearchIcon className="h-6 text-blue-500 hidden sm:inline-flex"/>
                     <button onClick={search} hidden type="submit">submit</button>
                 </form>
-                <Avatar/>
+                <Avatar 
+                url={"https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60"}
+                className="ml-auto"
+                />
             </div>
             
+            {/* headerOptions */}
+            <HeaderOptions/>
         </header>
     )
 }
