@@ -69,7 +69,7 @@ export default function Home() {
 
         <div className="flex flex-col w-1/2 space-y-2 mt-8 justify-center sm:space-y-0 sm:flex-row sm:space-x-4">
           <button onClick={submit} className="btn"> Google Search </button>
-          <button onClick={submit} className="btn"> I'm Feeling Lucky </button>
+          <button onClick={submit} className="btn"> Feeling Lucky </button>
         </div>
       </form>
 
