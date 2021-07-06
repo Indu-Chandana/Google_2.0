@@ -6,17 +6,20 @@ import Image from "next/image"
 import Footer from '../components/Footer';
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
+import { signIn, signOut, useSession } from 'next-auth/client';
 
 export default function Home() {
   const router = useRouter();
   const searchInputRef = useRef(null);
-
+  const [session] = useSession();
   const submit = (e) => {
     e.preventDefault();
 
     const term = searchInputRef.current.value;
 
     if(!term) return;
+
+    
 
     router.push(`/search?term=${term}`);
 }
@@ -41,7 +44,16 @@ export default function Home() {
         <p className="link">Image</p>
 
         <ViewGridIcon className="h-10 w-10 p-2 hover:bg-gray-100 rounded-full cursor-pointer"/>
-        <Avatar url="https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60"/>
+        {/* <Avatar className="" url="https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=60"/> */}
+        <div className="" onClick={!session? signIn : signOut}>
+          {session ? <Image 
+          src={session.user.image}
+          height={40}
+          width={40}
+          className="rounded-full cursor-pointer"
+          /> : <button className=" bg-gray-300 p-2 rounded-lg text-gray-600 hover:underline">Sign In</button>}
+          
+        </div>
       </div>
       </header>
 
